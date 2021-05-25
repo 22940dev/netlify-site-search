@@ -231,7 +231,7 @@ export default class App extends Component {
     if (user && !user.token) {
       return (
         <div className='app'>
-          <ForkMe url='https://github.com/netlify-labs/oauth-example' />
+          <ForkMe url='https://github.com/davidwells/netlify-site-search' />
           <h1>Netlify Site Search</h1>
           <button onClick={this.handleAuth} >
             <img alt='login to netlify' className='login-button' src={loginButton} />
@@ -243,7 +243,7 @@ export default class App extends Component {
     /* Show admin UI */
     return (
       <div className='app'>
-        <ForkMe url='https://github.com/netlify-labs/oauth-example' />
+        <ForkMe url='https://github.com/davidwells/netlify-site-search' />
         <h1>
           <span className='title-inner'>
             Hi {user.full_name || 'Friend'}
