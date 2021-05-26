@@ -16,6 +16,23 @@ import './App.css'
 
 // import stub from './stub'
 
+const FIRST_PAGE = 1
+const MAX_PAGES = 10
+const MAX_PER_PAGE = 100
+// recursive list sites
+const listSites = async ({ api, options }) => {
+  const { page = FIRST_PAGE, maxPages = MAX_PAGES, ...rest } = options
+  const sites = await api.listSites({ page, per_page: MAX_PER_PAGE, ...rest })
+  // TODO: use pagination headers when js-client returns them
+  if (sites.length === MAX_PER_PAGE && page + 1 <= maxPages) {
+    return [
+      ...sites, 
+      ...(await listSites({ api, options: { page: page + 1, maxPages, ...rest } }))
+    ]
+  }
+  return sites
+}
+
 export default class App extends Component {
   constructor(props, context) {
     super(props, context)
@@ -23,6 +40,11 @@ export default class App extends Component {
     const response = parseHash(window.location.hash)
     /* Clear hash */
     removeHash()
+    // Clear params
+    if (typeof window.history !=='undefined') {
+      window.history.replaceState({}, document.title, window.location.protocol + '//' + window.location.host + window.location.pathname);
+    }
+
 
     /* Protect against csrf (cross site request forgery https://bit.ly/1V1AvZD) */
     if (response.token && !localStorage.getItem(response.csrf)) {
@@ -54,10 +76,8 @@ export default class App extends Component {
 
     /* Fetch sites from netlify API */
     const client = new NetlifyAPI(window.atob(user.token))
-    const sites = await client.listSites({
-      filter: 'all'
-    })
-
+    const sites = await listSites({ api: client, options: { filter: 'all' } })
+    console.log(`Found ${sites.length} sites`)
     /* Set sites and turn off loading state */
     this.setState({
       sites: sites,

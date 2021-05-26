@@ -49,7 +49,7 @@ exports.handler = async (event, context) => {
       full_name: user.full_name || "NA",
       avatar: user.avatar_url || "NA"
     })
-
+    console.log('state.url', state.url)
     const URI = `${state.url}#${encodedUserData}&csrf=${state.csrf}&token=${Buffer.from(token, 'binary').toString('base64')}`
     console.log('URI', URI)
     /* Redirect user to authorizationURI */

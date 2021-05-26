@@ -23,7 +23,7 @@ exports.handler = async (event, context) => {
     /* State helps mitigate CSRF attacks & Restore the previous state of your app */
     state: `url=${redirectUrl}&csrf=${csrfToken}`,
   })
-
+  console.log('authorizationURI', authorizationURI)
   /* Redirect user to authorizationURI */
   return {
     statusCode: 302,
