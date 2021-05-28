@@ -1,11 +1,25 @@
+body {
+  background: #eee;
+}
 .app {
   margin: 20px;
   margin-top: 30px;
   margin-left: 40px;
   overflow: auto;
 }
+.hero {
+  text-align: center;
+}
+.demo {
+  margin-top: 68px;
+}
+.demo img {
+  max-width: 860px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);
+  border-radius: 8px;
+}
 .app h1 {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 .title-inner {
   display: flex;
@@ -14,6 +28,7 @@
 .title-inner button {
   margin-left: 20px;
 }
+
 
 button {
   cursor: pointer;
@@ -49,7 +64,7 @@ button {
   border-radius: 2px;
   font-size: 16px;
   padding: 11px 15px;
-  min-width: 300px;
+  width: 360px;
   display: inline-block;
   box-shadow: 0 0 0 2px rgba(120,130,152,.25);
   border: none;
@@ -69,6 +84,11 @@ button {
 }
 .item {
   text-align: center;
+}
+.table {
+  background: #fff;
+  border-radius: 8px;
+  min-height: 350px;
 }
 .site-wrapper, .site-wrapper-header {
   display: flex;
@@ -173,9 +193,18 @@ button {
   .site-team {
     display: none;
   }
+  .demo img {
+    max-width: 96%;
+  }
+  .search {
+    width: 300px;
+  }
 }
 
 @media (max-width: 830px) {
+  .hero button {
+    margin-top: 24px;
+  }
   .site-create-time {
     display: none;
   }

@@ -117,7 +117,11 @@ export default class App extends Component {
     const { sites, filterText, loading, sortBy, sortOrder } = this.state
 
     if (loading) {
-      return <div>Loading sites...</div>
+      return (
+        <div className='site-wrapper'>
+          <h3>Loading sites...</h3>
+        </div>
+      )
     }
 
     let order
@@ -252,10 +256,15 @@ export default class App extends Component {
       return (
         <div className='app'>
           <ForkMe url='https://github.com/davidwells/netlify-site-search' />
-          <h1>Netlify Site Search</h1>
-          <button onClick={this.handleAuth} >
-            <img alt='login to netlify' className='login-button' src={loginButton} />
-          </button>
+          <div className='hero'>
+            <h1>Netlify Site Search</h1>
+            <button onClick={this.handleAuth} >
+              <img alt='login to netlify' className='login-button' src={loginButton} />
+            </button>
+            <div className='demo'>
+              <img src='./site-search.jpg'/>
+            </div>
+          </div>
         </div>
       )
     }
@@ -278,62 +287,64 @@ export default class App extends Component {
             onChange={this.handleFilterInput}
             placeholder='Search for sites by name, id, url or repo'
           />
-          <div className='site-wrapper-header'>
-            <div
-              className='site-screenshot-header header'
-              data-sort='name'
-              onClick={this.handleSort}
-              title='Click to sort by site name'
-            >
-              Site Info
+          <div className='table'>
+            <div className='site-wrapper-header'>
+              <div
+                className='site-screenshot-header header'
+                data-sort='name'
+                onClick={this.handleSort}
+                title='Click to sort by site name'
+              >
+                Site Info
+              </div>
+              <div
+                className='site-info header'
+                data-sort='name'
+                onClick={this.handleSort}
+              />
+              <div
+                className='site-team header'
+                data-sort='account_name'
+                onClick={this.handleSort}
+                title='Click to sort by team name'
+              >
+                Team
+              </div>
+              <div
+                className='site-publish-time header'
+                data-sort='published_at'
+                onClick={this.handleSort}
+                title='Click to sort by last publish date'
+              >
+                Last published
+              </div>
+              <div
+                className='site-functions header'
+                data-sort='functions'
+                onClick={this.handleSort}
+                title='Click to sort by number of Functions'
+              >
+                Functions
+              </div>
+              <div
+                className='site-create-time header'
+                data-sort='created_at'
+                onClick={this.handleSort}
+                title='Click to sort by site creation date'
+              >
+                Created At
+              </div>
+              <div
+                className='site-repo-link header'
+                data-sort='repo'
+                onClick={this.handleSort}
+                title='Click to sort by repo link'
+              >
+                Repo
+              </div>
             </div>
-            <div
-              className='site-info header'
-              data-sort='name'
-              onClick={this.handleSort}
-            />
-            <div
-              className='site-team header'
-              data-sort='account_name'
-              onClick={this.handleSort}
-              title='Click to sort by team name'
-            >
-              Team
+            {this.renderSiteList()}
             </div>
-            <div
-              className='site-publish-time header'
-              data-sort='published_at'
-              onClick={this.handleSort}
-              title='Click to sort by last publish date'
-            >
-              Last published
-            </div>
-            <div
-              className='site-functions header'
-              data-sort='functions'
-              onClick={this.handleSort}
-              title='Click to sort by number of Functions'
-            >
-              Functions
-            </div>
-            <div
-              className='site-create-time header'
-              data-sort='created_at'
-              onClick={this.handleSort}
-              title='Click to sort by site creation date'
-            >
-              Created At
-            </div>
-            <div
-              className='site-repo-link header'
-              data-sort='repo'
-              onClick={this.handleSort}
-              title='Click to sort by repo link'
-            >
-              Repo
-            </div>
-          </div>
-          {this.renderSiteList()}
         </div>
       </div>
     )
